@@ -1,6 +1,10 @@
 const { getUser } = require("../service/auth");
 
 async function restrictToLoggedinUserOnly(req, res, next) {
+  // Bypass authentication check for "/url/shortid" routes so that non registered users can also use links
+  if (req.baseUrl == "/url") {
+    return next();
+  }
   const userUid = req.cookies?.uid;
 
   if (!userUid) return res.redirect("/login");
