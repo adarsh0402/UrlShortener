@@ -19,4 +19,9 @@ router.get("/login", (req, res) => {
   return res.render("login");
 });
 
+router.get("/logout", (req, res) => {
+  res.clearCookie("uid"); // Remove the session cookie
+  return res.redirect("/login"); // Redirect to the login page
+});
+
 module.exports = router;
